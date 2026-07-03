@@ -3,7 +3,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_PREFIX="${LOG_PREFIX:-ubuntu_server}"
 
-source "$SCRIPT_DIR/../../libs/bash/source.sh"
+source "$SCRIPT_DIR/../../libs/source.sh"
 log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
 
 # Source environment variables from $ENV_FILE, fallback to .env, then .env.example.
