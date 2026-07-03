@@ -20,7 +20,6 @@ require_podman_image() {
   verbose "Checking for required podman image: $image"
   require_arguments 1 "$@"
 
-  # Ensure the `podman` command is available before checking images.
   require_command "podman"
 
   if ! podman image exists "$image" 2>/dev/null; then

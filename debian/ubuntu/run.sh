@@ -111,10 +111,11 @@ usage() {
   log "Script usage: $0 <command> [args...]
     
     Commands:
-      --exec                Open a disposable shell inside the container
+      --render              Render the final Containerfile for debugging purposes
       -b --build            Build the container's image
+      --exec                Open a disposable shell inside the container
       --remove              Remove the container's image if it exists
-      --render              Render the Containerfile for debugging purposes
+      --ansible             
       -h --help --man       Show this help / manual
 
     Example exec commands:
@@ -134,12 +135,12 @@ usage() {
 
 cmd="${1:--help}"
 case "$cmd" in
-  -b|--build)
-    build_image
+  --render)
+    render_containerfile
     ;;
 
-  --remove)
-    remove_image
+  -b|--build)
+    build_image
     ;;
 
   --exec)
@@ -147,9 +148,14 @@ case "$cmd" in
     execute_podman_command "$@"
     ;;
 
-  --render)
-  render_containerfile
-  ;;
+  --remove)
+    remove_image
+    ;;
+
+  --ansible)
+    shift
+    execute_podman_command ansible-playbook -i localhost, "$@"
+    ;;
 
   -h|--help|--man|*) usage ;;
 esac
