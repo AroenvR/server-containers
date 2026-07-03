@@ -29,7 +29,7 @@ require_podman_image() {
 }
 
 #######################################
-# Run a command inside a temporary Podman container
+# Run a command inside a temporary Podman container as privileged
 #
 # Globals (required environment variables):
 #   IMAGE_REF           - Image reference to run (e.g. myorg/myimage:latest)
@@ -61,6 +61,7 @@ execute_podman_command() {
   require_podman_image "$IMAGE_REF"
 
   podman run --rm \
+    --privileged \
     --env "CONTAINER_LOCALE=$CONTAINER_LOCALE" \
     -v "$HOST_SHARED_DIR:$CONTAINER_MOUNT_DIR:Z" \
     "$IMAGE_REF" \

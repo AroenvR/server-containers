@@ -3,7 +3,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_PREFIX="${LOG_PREFIX:-ubuntu_server}"
 
-source "$SCRIPT_DIR/../../libs/source.sh"
+source "$SCRIPT_DIR/../../libs/bash/source.sh"
 log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
 
 # Source environment variables from $ENV_FILE, fallback to .env, then .env.example.
@@ -111,11 +111,15 @@ usage() {
   log "Script usage: $0 <command> [args...]
     
     Commands:
-      --exec                  Open a disposable shell inside the container
+      --exec                Open a disposable shell inside the container
       -b --build            Build the container's image
       --remove              Remove the container's image if it exists
       --render              Render the Containerfile for debugging purposes
       -h --help --man       Show this help / manual
+
+    Example exec commands:
+      --exec ls -rtAhlp /shared
+      --exec ansible-playbook -i localhost, /shared/ping.yml
 
     Environment:
       ENV_FILE=$env_file_location
