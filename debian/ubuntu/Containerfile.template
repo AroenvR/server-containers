@@ -1,0 +1,15 @@
+FROM ubuntu:__IMAGE_VERSION__
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      ca-certificates \
+      curl \
+      sudo \
+      bash \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+STOPSIGNAL SIGRTMIN+3
+CMD ["/sbin/init"]
