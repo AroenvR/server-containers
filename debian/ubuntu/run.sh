@@ -1,21 +1,30 @@
 #!/bin/bash
+#
+# This script runs a Ubuntu Container management toolset
 
+#######################################
+#            Script setup             #
+#######################################
+
+# Useful globals
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_PREFIX="${LOG_PREFIX:-ubuntu_server}"
 
-source "$SCRIPT_DIR/../../libs/source.sh"
-log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
-
-# Source environment variables from $ENV_FILE, fallback to .env, then .env.example.
-if [[ -n "${ENV_FILE:-}" ]]; then
-  env_file_location="$ENV_FILE"
-elif [[ -f "$SCRIPT_DIR/.env" ]]; then
-  env_file_location="$SCRIPT_DIR/.env"
-else
-  env_file_location="$SCRIPT_DIR/.env.example"
+# !!! Edit path to bash library !!!
+BASH_LIBS_SRC="$SCRIPT_DIR/../../lib/bash/source.sh";
+if [[ ! -f "$BASH_LIBS_SRC" ]]; then
+  echo "Failed to find bash library at: $BASH_LIBS_SRC"
+  exit 1
 fi
 
-source_env_file "$env_file_location"
+# Source the library.
+source "$BASH_LIBS_SRC"
+source_default_environment "$SCRIPT_DIR/.env.example"
+log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
+
+#######################################
+#           Setup complete!           #
+#######################################
 
 require_env_var "IMAGE_NAME"
 require_env_var "IMAGE_VERSION"
