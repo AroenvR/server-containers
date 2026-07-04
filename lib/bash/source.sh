@@ -8,7 +8,7 @@ set -Eeuo pipefail
 LIBS_SOURCE_SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Down-source utilities
-. "$LIBS_SOURCE_SCRIPT_PATH/utils/source.sh"
+. "$LIBS_SOURCE_SCRIPT_PATH/utils/utils.sh"
 
 # Debug log to make it clear to scripts that they've successfully sourced this library and its packages.
 verbose "Sourced bash libs from $LIBS_SOURCE_SCRIPT_PATH"

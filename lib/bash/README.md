@@ -20,20 +20,37 @@ This library aggregates reusable shell functions organized into focused modules:
 
 ## Usage
 
-Source this library's entry point in your original scripts:
+Source this library's entry point in your own scripts.  
+I took the liberty of making a little template:
 
 ```bash
-# Capture the current script's absolute path.
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+#!/bin/bash
+#
+# This script does ...
 
-# Set a prefix for logging traceability
-LOG_PREFIX="example_logging_prefix"
+#######################################
+#            Script setup             #
+#######################################
 
-# Source (import) the library.
-source "$SCRIPT_DIR/../../lib/source.sh"
+# Useful globals
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOG_PREFIX="${LOG_PREFIX:-ubuntu_server}"
 
-# Log a message to using one of the sourced library's utilities.
-log "Starting build process"
+# !!! Edit path to bash library !!!
+BASH_LIBS_SRC="$SCRIPT_DIR/../../lib/bash/source.sh";
+if [[ ! -f "$BASH_LIBS_SRC" ]]; then
+  echo "Failed to find bash library at: $BASH_LIBS_SRC"
+  exit 1
+fi
+
+# Source the library.
+source "$BASH_LIBS_SRC"
+source_default_environment "$SCRIPT_DIR/.env.example"
+log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
+
+#######################################
+#           Setup complete!           #
+#######################################
 ```
 
 ### Debug Logging
@@ -44,7 +61,7 @@ Enable verbose logging by setting the `DEBUG` variable:
 DEBUG=1 source "$SCRIPT_DIR/../../lib/source.sh"
 ```
 
-## Path traversal
-
-Some utility functions provide path traversal logic. They expect to find a `.git` file/directory or a ROOT marker.  
-If they don't find what they expect to find within 5 traversals or when finding certain files/directories such as `/` starting directories, `.` starting directories or f.ex. a `.bashrc/` file, they will fail.
+# Set up as subtree
+```bash
+git subtree add --prefix=lib/bash git@github.com:AroenvR/bash-libs.git main --squash
+```

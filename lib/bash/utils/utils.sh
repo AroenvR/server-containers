@@ -34,16 +34,16 @@ require_arguments() {
 UTILS_SOURCE_SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Down-source logging utilities (source first, so down-stream scripts can utilize it).
-. "$UTILS_SOURCE_SCRIPT_PATH/logging/source.sh"
+. "$UTILS_SOURCE_SCRIPT_PATH/logging/logging.sh"
 
 # Down-source environment utilities.
-. "$UTILS_SOURCE_SCRIPT_PATH/environment/source.sh"
+. "$UTILS_SOURCE_SCRIPT_PATH/environment/environment.sh"
 
 # Down-source file management utilities.
-. "$UTILS_SOURCE_SCRIPT_PATH/file_management/source.sh"
+. "$UTILS_SOURCE_SCRIPT_PATH/file_management/file_management.sh"
 
 # Down-source podman utilities.
-. "$UTILS_SOURCE_SCRIPT_PATH/podman/source.sh"
+. "$UTILS_SOURCE_SCRIPT_PATH/podman/podman.sh"
 
 #######################################
 # Execute a command from a different directory.
