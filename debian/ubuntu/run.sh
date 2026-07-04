@@ -19,7 +19,7 @@ fi
 
 # Source the library.
 source "$BASH_LIBS_SRC"
-source_default_environment "$SCRIPT_DIR/.env.example"
+source_default_environment "$SCRIPT_DIR"
 log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
 
 #######################################
@@ -105,7 +105,6 @@ remove_image() {
 # Print usage information and current environment configuration
 #
 # Globals:
-#   env_file_location - The sourced environment file location
 #   IMAGE_NAME        - The container image name
 #   IMAGE_VERSION     - The container image version
 #   CONTAINER_MOUNT_DIR - Container mount target directory
@@ -117,7 +116,7 @@ remove_image() {
 #   None
 #######################################
 usage() {
-  log "Script usage: $0 <command> [args...]
+  log "No arguments provided, showing help page. Usage: $0 <command> [args...]
     
     Commands:
       --render              Render the final Containerfile for debugging purposes
@@ -132,7 +131,6 @@ usage() {
       --exec ansible-playbook -i localhost, /shared/ping.yml
 
     Environment:
-      ENV_FILE=$env_file_location
       IMAGE_NAME=$IMAGE_NAME
       IMAGE_VERSION=$IMAGE_VERSION
       IMAGE_REF=$IMAGE_REF
