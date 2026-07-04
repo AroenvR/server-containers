@@ -27,12 +27,10 @@
 #   0 if a valid env file was sourced or no env file was usable.
 #######################################
 source_default_environment() {
-  debug "Sourcing default environment variables"
+  verbose "Sourcing default environment variables"
 
   local requested_env_file="${1:-}"
   local resolved_env_file=""
-
-  verbose "Determining environment file from ENV_FILE or provided argument"
 
   if [[ -n "${ENV_FILE:-}" ]]; then
     if resolved_env_file="$(resolve_env_candidate "${ENV_FILE}")"; then
