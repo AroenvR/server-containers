@@ -27,10 +27,12 @@
 #   0 if a valid env file was sourced or no env file was usable.
 #######################################
 source_default_environment() {
+  debug "Sourcing default environment variables"
+
   local requested_env_file="${1:-}"
   local resolved_env_file=""
 
-  debug "Determining environment file from ENV_FILE or provided argument"
+  verbose "Determining environment file from ENV_FILE or provided argument"
 
   if [[ -n "${ENV_FILE:-}" ]]; then
     if resolved_env_file="$(resolve_env_candidate "${ENV_FILE}")"; then
@@ -131,7 +133,7 @@ resolve_env_candidate() {
 source_env_file() {
   local env_file="${1:-}"
 
-  debug "Sourcing environment variables from: $env_file"
+  info "Sourcing environment variables from: $env_file"
   require_arguments 1 "$@"
 
   # Guardrail: refuse to source anything whose filename does not start
