@@ -12,6 +12,7 @@ bootstrap_tests() {
     fi
 
     source "$bash_lib_src"
+    source "$script_dir/assert.sh"
     source_env_file "$script_dir/../.env.test"
 
     verbose "Finished setting up test environment"

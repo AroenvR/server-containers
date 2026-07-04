@@ -167,7 +167,7 @@ source_env_file() {
 require_env_var() {
   local var_name="${1:-}"
 
-  verbose "Checking required environment variable: '\$$var_name'"
+  verbose "Checking required environment variable: '$var_name'"
   require_arguments 1 "$@"
 
   if [[ -z "${!var_name:-}" ]]; then
