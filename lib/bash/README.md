@@ -9,6 +9,9 @@ This library aggregates reusable shell functions organized into focused modules:
 
 ```plaintext
 <bash_lib_root>/
+├── __tests__/          # Helpers for this library's testing suites.
+│   └── bootstrap.sh/   # Bootstrapper for a test suites.
+│
 ├── utils/              # Utility functions provided by this library.
 │   ├── environment/    # Environment variable utility functions.
 │   ├── file_management/# File management utility functions.
@@ -46,6 +49,8 @@ fi
 # Source the library.
 source "$BASH_LIBS_SRC"
 source_default_environment "$SCRIPT_DIR/.env.example"
+
+# Log setup success
 log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
 
 #######################################
@@ -53,15 +58,15 @@ log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
 #######################################
 ```
 
-### Debug Logging
+### Verbose-level Logging
 
-Enable verbose logging by setting the `DEBUG` variable:
+Enable verbose logging by setting the `VERBOSE` variable:
 
 ```bash
-DEBUG=1 source "$SCRIPT_DIR/../../lib/source.sh"
+VERBOSE=1 /path/to/lib/consumer/foo.sh
 ```
 
-# Set up as subtree
+## Set up as subtree
 ```bash
 git subtree add --prefix=lib/bash git@github.com:AroenvR/bash-libs.git main --squash
 ```

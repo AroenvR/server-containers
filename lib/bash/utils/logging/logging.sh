@@ -90,14 +90,14 @@ debug() {
 # Log a verbose message.
 # Globals:
 #   LOG_PREFIX
-#   DEBUG
+#   VERBOSE
 # Arguments:
 #   $*: Message to log.
 # Outputs:
-#   Writes verbose message to stdout if DEBUG is set.
+#   Writes verbose message to stdout if VERBOSE is set.
 #######################################
 verbose() {
-  [[ -n "${DEBUG:-}" ]] || return 0
+  [[ -n "${VERBOSE:-}" ]] || return 0
   output_message VERBOSE STDOUT "$@"
 }
 
