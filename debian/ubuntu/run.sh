@@ -20,6 +20,8 @@ fi
 # Source the library.
 source "$BASH_LIBS_SRC"
 source_default_environment "$SCRIPT_DIR"
+
+# Log setup success
 log "Executing the $LOG_PREFIX script in directory: $SCRIPT_DIR"
 
 #######################################
@@ -116,7 +118,9 @@ remove_image() {
 #   None
 #######################################
 usage() {
-  log "No arguments provided, showing help page. Usage: $0 <command> [args...]
+  log "Showing help / manual
+  
+    Usage: $0 <command> [args...]
     
     Commands:
       --render              Render the final Containerfile for debugging purposes
@@ -164,5 +168,7 @@ case "$cmd" in
     execute_podman_command ansible-playbook -i localhost, "$@"
     ;;
 
-  -h|--help|--man|*) usage ;;
+  -h|--help|--man|*)
+    usage 
+    ;;
 esac
