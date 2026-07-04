@@ -94,10 +94,10 @@ debug() {
 # Arguments:
 #   $*: Message to log.
 # Outputs:
-#   Writes verbose message to stdout if VERBOSE is set.
+#   Writes verbose message to stdout only if VERBOSE is exactly "1".
 #######################################
 verbose() {
-  [[ -n "${VERBOSE:-}" ]] || return 0
+  [[ "${VERBOSE:-}" == "1" ]] || return 0
   output_message VERBOSE STDOUT "$@"
 }
 
