@@ -4,11 +4,26 @@
 
 set -Eeuo pipefail
 
-# Define this script's absolute path for easier down-sourcing of this library's packages.
-LIBS_SOURCE_SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+#######################################
+# Source the bash libs from this file's own directory.
+#
+# Uses ${BASH_SOURCE[0]} to determine the runtime location of this script.
+#
+# Globals:
+#   None
+# Arguments:
+#   None
+# Outputs:
+#   Writes a verbose message when the library is sourced.
+# Returns:
+#   0 if the library is sourced successfully.
+#######################################
+source_bash_lib() {
+    local lib_root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Down-source utilities
-. "$LIBS_SOURCE_SCRIPT_PATH/utils/utils.sh"
+    # Down-source utilities
+    . "$lib_root_dir/utils/utils.sh"
 
-# Debug log to make it clear to scripts that they've successfully sourced this library and its packages.
-verbose "Sourced bash libs from $LIBS_SOURCE_SCRIPT_PATH"
+    verbose "Sourced bash libs from $lib_root_dir"
+}
+source_bash_lib
